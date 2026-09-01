@@ -1,0 +1,1984 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<style>
+								body {
+									background-color: white; /* Ensure the iframe has a white background */
+								}
+
+								
+							</style>
+                        </head>
+                        <body>
+                            <!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <meta name="theme-color" content="#18263a" />
+  <title>밀정을 찾아라! | 대한민국 임시정부 경무국</title>
+
+  <style>
+    :root {
+      --ink: #201c17;
+      --paper: #efe3c8;
+      --wood: #55391f;
+      --wood-dark: #2e1c0e;
+      --gold: #d3a94b;
+      --safe: #2f7d4d;
+      --watch: #b78416;
+      --danger: #9e3030;
+      --white: #fffaf0;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+      background: linear-gradient(145deg, #101a28, #263e5c);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .screen {
+      display: none;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    .screen.active {
+      display: block;
+      animation: fade-in 0.3s ease;
+    }
+
+    .loading-screen.active,
+    .main-screen.active {
+      display: grid;
+      place-items: center;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .wood-panel,
+    .paper-panel {
+      border: 4px solid rgba(38, 21, 9, 0.8);
+      border-radius: 16px;
+      box-shadow: 0 10px 24px var(--shadow);
+    }
+
+    .wood-panel {
+      color: var(--white);
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.04) 0 2px,
+          transparent 2px 8px
+        ),
+        linear-gradient(135deg, var(--wood), var(--wood-dark));
+    }
+
+    .paper-panel {
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(86, 61, 31, 0.05) 0 1px,
+          transparent 1px 6px
+        ),
+        var(--paper);
+    }
+
+    .pixel-btn {
+      border: 3px solid rgba(0, 0, 0, 0.45);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: white;
+      font-weight: 800;
+      background: #526273;
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .pixel-btn:active:not(:disabled) {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .pixel-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .primary {
+      background: #9c3c32;
+    }
+
+    .safe {
+      background: var(--safe);
+    }
+
+    .watch {
+      background: var(--watch);
+    }
+
+    .danger {
+      background: var(--danger);
+    }
+
+    /* 메인 */
+
+    .main-screen {
+      background:
+        linear-gradient(rgba(8, 17, 28, 0.5), rgba(8, 17, 28, 0.88)),
+        url("assets/backgrounds/main-bg.webp");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .main-content {
+      width: min(100%, 760px);
+      text-align: center;
+    }
+
+    .title-plaque {
+      margin-bottom: 20px;
+      padding: 28px;
+      border: 5px solid var(--gold);
+      border-radius: 18px;
+      color: #fff5dc;
+      background: rgba(16, 30, 46, 0.9);
+      box-shadow: 0 12px 28px var(--shadow);
+    }
+
+    .title-plaque h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 10vw, 4.8rem);
+      line-height: 1.05;
+    }
+
+    .title-plaque h1 b {
+      color: #f1cd72;
+    }
+
+    .title-plaque p {
+      margin: 18px 0 0;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+
+    .main-start-panel {
+      padding: 22px;
+      text-align: left;
+    }
+
+    .main-start-panel label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .nickname-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nickname-row input {
+      flex: 1;
+      min-width: 0;
+      padding: 12px;
+      border: 3px solid #29160a;
+      border-radius: 9px;
+      font-weight: 700;
+    }
+
+    .microcopy,
+    .notice {
+      margin: 12px 0 0;
+      color: #ffe9bd;
+      line-height: 1.55;
+      font-size: 0.9rem;
+    }
+
+    .notice {
+      padding: 12px;
+      border-left: 5px solid var(--gold);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* 로딩 */
+
+    .loading-screen,
+    .result-screen {
+      background:
+        linear-gradient(rgba(19, 29, 43, 0.72), rgba(11, 18, 29, 0.92)),
+        url("assets/backgrounds/story-bg.webp");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .loading-panel {
+      width: min(100%, 650px);
+      padding: 34px;
+      text-align: center;
+    }
+
+    .loading-seal {
+      display: grid;
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 16px;
+      place-items: center;
+      border: 4px solid #e5c56f;
+      border-radius: 50%;
+      color: #f1d77f;
+      font-size: 2.2rem;
+      font-weight: 900;
+    }
+
+    .loading-track {
+      height: 18px;
+      overflow: hidden;
+      border: 3px solid #1c1109;
+      border-radius: 99px;
+      background: #decda8;
+    }
+
+    .loading-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #c24b3c, #edca67);
+      transition: width 0.18s ease;
+    }
+
+    /* 게임 */
+
+    .game-screen {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding-bottom: 80px;
+      background:
+        linear-gradient(rgba(22, 31, 42, 0.7), rgba(17, 23, 32, 0.9)),
+        url("assets/backgrounds/game-bg.webp");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .game-topbar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .hud-block {
+      padding: 10px;
+      border: 3px solid #0c121c;
+      border-radius: 10px;
+      color: #fff5dc;
+      text-align: center;
+      background: #253d5a;
+    }
+
+    .hud-block span {
+      display: block;
+      color: #dac58d;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .hud-block b {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.12rem;
+    }
+
+    .time-warning {
+      min-height: 26px;
+      color: #ffd36c;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .investigation-board {
+      overflow: hidden;
+      border: 5px solid #2b1a0d;
+      border-radius: 17px;
+      background: linear-gradient(145deg, #5f4124, #2b1c0d);
+      box-shadow: 0 14px 28px var(--shadow);
+    }
+
+    .agent-zone {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 22px;
+      color: white;
+      background: rgba(20, 42, 65, 0.9);
+    }
+
+    .portrait {
+      width: 160px;
+      height: 160px;
+      overflow: hidden;
+      border: 5px solid #caa64f;
+      border-radius: 12px;
+      background: #142436;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .agent-meta h2 {
+      margin: 0 0 8px;
+      color: #f1d579;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 3px 4px 0 0;
+      padding: 5px 8px;
+      border-radius: 999px;
+      color: #271a0f;
+      font-size: 0.82rem;
+      font-weight: 900;
+      background: #e8d39d;
+    }
+
+    .dialogue {
+      margin-top: 13px;
+      padding: 12px;
+      border-left: 5px solid #e4bd60;
+      border-radius: 7px;
+      color: #fff1c7;
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.22);
+    }
+
+    .document-area {
+      padding: 20px;
+    }
+
+    .document-guide,
+    .review-count {
+      color: #ffe6a7;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .document-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .document-card {
+      min-height: 180px;
+      padding: 16px;
+      border: 4px solid #795425;
+      border-radius: 10px;
+      color: #2a2118;
+      text-align: left;
+      background: var(--paper);
+      box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .document-card.read {
+      outline: 4px solid #3f925b;
+    }
+
+    .doc-no {
+      display: block;
+      color: #8c3b2d;
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+
+    .document-card b {
+      display: block;
+      margin: 9px 0;
+    }
+
+    .decision-dock {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .decision-btn {
+      min-height: 88px;
+      border: 4px solid rgba(0, 0, 0, 0.42);
+      border-radius: 12px;
+      color: white;
+      font-weight: 900;
+      box-shadow: 0 6px 0 rgba(0, 0, 0, 0.32);
+    }
+
+    .decision-btn strong {
+      display: block;
+      font-size: 1.2rem;
+    }
+
+    .decision-btn span {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.78rem;
+    }
+
+    /* 모달 */
+
+    .modal {
+      position: fixed;
+      z-index: 20;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.72);
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .modal-sheet {
+      position: relative;
+      width: min(100%, 680px);
+      max-height: 86vh;
+      overflow-y: auto;
+      padding: 26px;
+      border: 5px solid #6f4b21;
+      border-radius: 14px;
+      background: var(--paper);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border: 2px solid #4d2b14;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.4rem;
+      background: #89372e;
+    }
+
+    .modal-sheet p {
+      white-space: pre-line;
+      line-height: 1.8;
+    }
+
+    .answer-result {
+      text-align: center;
+    }
+
+    .decision-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 99px;
+      color: white;
+      font-weight: 900;
+    }
+
+    /* 결과 */
+
+    .result-wrap {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: 25px 0;
+    }
+
+    .result-plaque {
+      padding: 28px;
+      color: white;
+      text-align: center;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .result-box {
+      padding: 16px 8px;
+      color: white;
+      text-align: center;
+      background: #5a3c20;
+    }
+
+    .result-box span {
+      display: block;
+      color: #f4d98c;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .result-box b {
+      display: block;
+      margin-top: 7px;
+      font-size: 1.5rem;
+    }
+
+    .analysis-panel {
+      padding: 20px;
+    }
+
+    .analysis-list {
+      line-height: 1.9;
+    }
+
+    .wrong-card {
+      margin-top: 10px;
+      padding: 13px;
+      border: 2px solid #8a5e2c;
+      border-radius: 9px;
+      background: #f7edda;
+    }
+
+    .result-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 650px) {
+      .screen {
+        padding: 16px 10px;
+      }
+
+      .nickname-row,
+      .agent-zone {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+      }
+
+      .portrait {
+        margin: 0 auto;
+      }
+
+      .game-topbar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .document-grid,
+      .decision-dock,
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- 메인 화면 -->
+    <section id="screen-main" class="screen main-screen active">
+      <div class="main-content">
+        <header class="title-plaque">
+          <h1>밀정을<br /><b>찾아라!</b></h1>
+          <p>
+            대한민국 임시정부 경무국의 조사관이 되어<br />
+            세 가지 단서를 비교하고 요원을 판단하세요.
+          </p>
+        </header>
+
+        <section class="main-start-panel wood-panel">
+          <label for="nickname">조사관 이름</label>
+
+          <div class="nickname-row">
+            <input
+              id="nickname"
+              type="text"
+              maxlength="24"
+              autocomplete="off"
+              placeholder="예: 31301 홍길동"
+            />
+
+            <button id="btn-start" class="pixel-btn primary" type="button" disabled>
+              조사 시작
+            </button>
+          </div>
+
+          <p id="nickname-validation" class="microcopy">
+            숫자 5자리와 띄어쓰기 뒤의 한글 이름을 입력해 주세요.
+          </p>
+
+          <p class="notice">
+            <b>교육용 가상 이야기입니다.</b><br />
+            학번, 이름, 점수, 정답 수, 작전 평가 등의 게임 결과가 교사용
+            Google Sheet에 기록됩니다.
+          </p>
+        </section>
+      </div>
+    </section>
+
+    <!-- 로딩 화면 -->
+    <section id="screen-loading" class="screen loading-screen">
+      <div class="loading-panel wood-panel">
+        <div class="loading-seal">印</div>
+        <h2>경무국 작전 준비 중</h2>
+        <p id="loading-text">요원 기록과 비밀문서를 정리하고 있습니다.</p>
+
+        <div class="loading-track">
+          <div id="loading-bar" class="loading-bar"></div>
+        </div>
+
+        <p><b id="loading-percent">0%</b></p>
+      </div>
+    </section>
+
+    <!-- 게임 화면 -->
+    <section id="screen-game" class="screen game-screen">
+      <div class="game-topbar">
+        <div class="hud-block">
+          <span>조사 점수</span>
+          <b id="hud-score">0</b>
+        </div>
+
+        <div class="hud-block">
+          <span>작전 시간</span>
+          <b id="hud-time">05:00</b>
+        </div>
+
+        <div class="hud-block">
+          <span>요원 심사</span>
+          <b id="hud-count">1 / 20</b>
+        </div>
+
+        <div class="hud-block">
+          <span>연속 판정</span>
+          <b id="hud-combo">0</b>
+        </div>
+      </div>
+
+      <div id="time-warning" class="time-warning"></div>
+
+      <section class="investigation-board">
+        <div class="agent-zone">
+          <div class="portrait">
+            <img
+              id="agent-portrait-img"
+              src="assets/portraits/1.webp"
+              alt="요원 초상"
+            />
+          </div>
+
+          <div class="agent-meta">
+            <h2 id="agent-name">요원명</h2>
+            <span id="agent-role" class="tag">역할</span>
+            <span id="agent-region" class="tag">활동 지역</span>
+            <span id="agent-difficulty" class="tag">난이도</span>
+
+            <div id="agent-dialogue" class="dialogue"></div>
+          </div>
+        </div>
+
+        <div class="document-area">
+          <p class="document-guide">
+            가정 기록, 업무 수첩, 주변의 증언을 모두 비교하여 판단하세요.
+          </p>
+
+          <div id="document-grid" class="document-grid"></div>
+
+          <p id="review-count" class="review-count">확인한 단서: 0 / 3</p>
+
+          <div class="decision-dock">
+            <button class="decision-btn safe" type="button" data-decision="safe">
+              <strong>✓ 안전</strong>
+              <span>현재 증거로 신뢰 가능</span>
+            </button>
+
+            <button class="decision-btn watch" type="button" data-decision="watch">
+              <strong>! 감시</strong>
+              <span>추가 확인 필요</span>
+            </button>
+
+            <button class="decision-btn danger" type="button" data-decision="danger">
+              <strong>⚠ 위험</strong>
+              <span>정보 접근 제한</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- 결과 화면 -->
+    <section id="screen-result" class="screen result-screen">
+      <div class="result-wrap">
+        <section class="result-plaque wood-panel">
+          <h2 id="result-title">작전 평가</h2>
+          <p id="result-subtitle"></p>
+        </section>
+
+        <section class="result-grid">
+          <div class="result-box wood-panel">
+            <span>최종 점수</span>
+            <b id="result-score">0</b>
+          </div>
+
+          <div class="result-box wood-panel">
+            <span>판정 정확도</span>
+            <b id="result-accuracy">0%</b>
+          </div>
+
+          <div class="result-box wood-panel">
+            <span>최대 콤보</span>
+            <b id="result-combo">0</b>
+          </div>
+        </section>
+
+        <section class="analysis-panel paper-panel">
+          <h3>조사 분석</h3>
+          <ul id="result-analysis" class="analysis-list"></ul>
+          <div id="wrong-review"></div>
+        </section>
+
+        <div class="result-actions">
+          <button id="btn-retry" class="pixel-btn primary" type="button">
+            다시 도전
+          </button>
+
+          <button id="btn-home" class="pixel-btn" type="button">
+            메인으로
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 단서 모달 -->
+    <div id="document-modal" class="modal" aria-hidden="true">
+      <article class="modal-sheet">
+        <button id="btn-close-document" class="modal-close" type="button">×</button>
+        <h3 id="modal-doc-title">단서</h3>
+        <p id="modal-doc-text"></p>
+      </article>
+    </div>
+
+    <!-- 판정 결과 모달 -->
+    <div id="answer-modal" class="modal" aria-hidden="true">
+      <article class="modal-sheet answer-result">
+        <h2 id="answer-title">판정 결과</h2>
+
+        <span id="answer-decision-label" class="decision-label watch">
+          정답: 감시
+        </span>
+
+        <p id="answer-score-message"></p>
+
+        <div class="paper-panel" style="padding: 14px; text-align: left;">
+          <b>판정 이유</b>
+          <p id="answer-explanation"></p>
+        </div>
+
+        <br />
+
+        <button id="btn-next-agent" class="pixel-btn primary" type="button">
+          다음 요원
+        </button>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    /*
+      Google Apps Script 웹앱 URL
+      현재 사용 중인 URL을 그대로 넣었습니다.
+    */
+    const GOOGLE_SHEETS_WEB_APP_URL =
+      "https://script.google.com/macros/s/AKfycbwc8Or6WfbhwXpog6AwvjQ_KAfd3LN7ed83fH3Gm5nb3_jb4_cR2lDCaFt3UiJi2_rh/exec";
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+    const NICKNAME_PATTERN = /^\d{5}\s+[가-힣]+$/;
+
+    const state = {
+      nickname: "",
+      score: 0,
+      combo: 0,
+      maxCombo: 0,
+      correctCount: 0,
+      wrongCount: 0,
+      rushedCount: 0,
+
+      /* Google Sheet 중복 전송 방지 */
+      resultSent: false,
+
+      currentIndex: 0,
+      viewedDocs: new Set(),
+      decisionLog: [],
+      agents: [],
+      timeLeft: 300,
+      timerId: null,
+      isPlaying: false
+    };
+
+    /*
+      요원 데이터 예시입니다.
+      기존에 만든 20명의 상세 요원 데이터가 있다면
+      이 AGENTS 부분만 기존 데이터로 교체해도 됩니다.
+    */
+    const AGENTS = [
+      {
+        id: "a01",
+        portrait: "assets/portraits/1.webp",
+        agentName: "매화",
+        role: "통행증 전달",
+        region: "경성",
+        difficulty: "쉬움",
+        dialogue: "“통행증의 날짜와 도장을 다시 확인해 두었습니다.”",
+        correctDecision: "danger",
+        explanation:
+          "1910년대 헌병 경찰 제도와 관련된 기록을 의도적으로 바꾸려 했습니다. 중요한 역사 기록을 왜곡한 점에서 위험 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "매화는 어릴 적부터 숫자와 도장을 좋아했습니다. 옛 제복의 이름을 자주 헷갈린다고 가족이 적었습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "1910년 병합 뒤에는 보통 경찰만 마을을 지켰으므로, 통행증의 ‘헌병 분견소’를 ‘경찰서’로 고쳐 적겠다고 기록했습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "매화는 낡은 통행증의 ‘헌병’이라는 글자를 볼 때마다 굳이 바꿔야 한다고 말했다고 합니다."
+          }
+        ]
+      },
+      {
+        id: "a02",
+        portrait: "assets/portraits/2.webp",
+        agentName: "제비",
+        role: "전단 배부",
+        region: "경성",
+        difficulty: "쉬움",
+        dialogue: "“탑골공원 근처의 약속은 날짜를 틀리면 큰일입니다.”",
+        correctDecision: "danger",
+        explanation:
+          "3·1 운동은 1920년이 아니라 1919년 3월 1일에 시작되었습니다. 핵심 사건의 연도를 바꾼 점에서 위험 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "제비는 달력을 모으고 날짜를 꼼꼼히 확인하는 버릇이 있습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "1920년 3월 1일 탑골공원 부근에서 독립선언 소식이 처음 퍼졌다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "제비는 삼월 첫날을 중요하게 여겼지만 어느 해인지는 자주 달력을 찾았습니다."
+          }
+        ]
+      },
+      {
+        id: "a03",
+        portrait: "assets/portraits/3.webp",
+        agentName: "바람",
+        role: "연락소 안내",
+        region: "상하이",
+        difficulty: "쉬움",
+        dialogue: "“새 연락원에게 첫 연락소의 위치를 설명해 주었습니다.”",
+        correctDecision: "danger",
+        explanation:
+          "대한민국 임시정부는 1919년 4월 중국 상하이에서 수립되었습니다. 서울에서 처음 시작되었다는 안내는 잘못된 정보입니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "바람은 상하이의 낯선 골목과 길 이름을 익히며 연락원들을 도왔습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "대한민국 임시정부는 서울에서 처음 시작되었고 나중에 상하이로 옮겨 왔다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "바람은 새 연락원에게 첫 연락소는 서울에 있었다고 자신 있게 말했습니다."
+          }
+        ]
+      },
+      {
+        id: "a04",
+        portrait: "assets/portraits/4.webp",
+        agentName: "구름",
+        role: "문서 운반",
+        region: "경성",
+        difficulty: "쉬움",
+        dialogue: "“서쪽 문에서 봉투를 넘겼습니다. 시간도 정확합니다.”",
+        correctDecision: "watch",
+        explanation:
+          "기록과 목격 증언의 장소가 다르지만, 목격자의 시계도 정확하지 않을 가능성이 있습니다. 확실한 증거가 부족하므로 감시가 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "구름은 고장 난 시계를 버리지 않습니다. 가족들은 그 시계를 약속 시간에 믿지 않습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "4월 12일 밤 8시 40분, 서문 찻집 뒤편에서 봉투를 전달했다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "같은 시각 구름을 동문 선착장 근처에서 보았다는 증언이 있습니다. 다만 목격자의 시계는 자주 멈춥니다."
+          }
+        ]
+      },
+      {
+        id: "a05",
+        portrait: "assets/portraits/5.webp",
+        agentName: "초승달",
+        role: "식량 전달",
+        region: "상하이",
+        difficulty: "쉬움",
+        dialogue: "“쌀 자루 하나는 잠시 다른 곳에 두었습니다.”",
+        correctDecision: "safe",
+        explanation:
+          "비를 피하기 위해 식량을 진료소 처마 밑에 보관했고, 다음 날 회수한 기록과 증언이 일치합니다. 안전 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "초승달은 비가 오면 기침이 나지만 무거운 쌀자루도 혼자 옮깁니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "쌀 네 자루 중 한 자루를 비를 피해 진료소 처마 아래에 임시 보관했다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "진료소 심부름꾼은 초승달이 다음 날 아침 쌀자루를 가져갔다고 말했습니다."
+          }
+        ]
+      },
+      {
+        id: "a06",
+        portrait: "assets/portraits/6.webp",
+        agentName: "대나무",
+        role: "의약품 운반",
+        region: "경성",
+        difficulty: "쉬움",
+        dialogue: "“약속 장소에는 늦었지만, 먼저 급한 곳에 들렀습니다.”",
+        correctDecision: "safe",
+        explanation:
+          "약속에 늦은 이유는 다친 인쇄소 심부름꾼에게 붕대를 전달했기 때문입니다. 기록과 증언이 일치하므로 안전 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "대나무는 아픈 사람을 그냥 지나치지 못한다고 가족이 적었습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "다친 인쇄소 심부름꾼에게 붕대를 전달하느라 35분 늦었다고 기록했습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "인쇄소 주인은 대나무가 붕대와 물을 구해 주었다고 증언했습니다."
+          }
+        ]
+      },
+      {
+        id: "a07",
+        portrait: "assets/portraits/7.webp",
+        agentName: "윤슬",
+        role: "봉인 관리",
+        region: "상하이",
+        difficulty: "쉬움",
+        dialogue: "“밀랍 봉인은 제가 모두 확인했습니다.”",
+        correctDecision: "watch",
+        explanation:
+          "밀랍 조각이 사라졌지만 윤슬이 직접 봉인을 훼손했다는 증거는 없습니다. 추가 확인을 위한 감시 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "윤슬의 동생은 밀랍 조각으로 장난감을 만들며, 윤슬은 중요한 봉투에 손대지 말라고 했습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "봉투 여섯 개 중 마지막 한 개의 교체용 봉인 조각을 찾지 못했다고 기록했습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "창고지기는 윤슬의 동생이 붉은 밀랍 조각을 들고 노는 것을 보았다고 했습니다."
+          }
+        ]
+      },
+      {
+        id: "a08",
+        portrait: "assets/portraits/8.webp",
+        agentName: "물결",
+        role: "연표 정리",
+        region: "상하이",
+        difficulty: "중간",
+        dialogue: "“연도 하나가 틀리면 전달 경로도 꼬일 수 있습니다.”",
+        correctDecision: "danger",
+        explanation:
+          "조선태형령은 3·1 운동 이후가 아니라 1910년대 무단통치기에 실시되었습니다. 사건 순서를 왜곡했으므로 위험 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "물결은 옛 신문을 오려 연표를 만들지만 서로 다른 해의 기사를 한 장에 붙이기도 합니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "3·1 운동 이후 일본이 조선태형령을 실시했다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "물결은 사건의 앞뒤 순서를 자주 묻지만, 수정하지 않고 기록을 남겼습니다."
+          }
+        ]
+      },
+      {
+        id: "a09",
+        portrait: "assets/portraits/9.webp",
+        agentName: "난초",
+        role: "상점 연락",
+        region: "경성",
+        difficulty: "중간",
+        dialogue: "“상점 주인에게 약속한 물건만 받아 왔습니다.”",
+        correctDecision: "safe",
+        explanation:
+          "업무 기록과 상점 주인의 증언이 일치하며, 연락망 정보를 누설한 흔적도 없습니다. 안전 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "난초는 영수증과 동전을 꼼꼼하게 보관합니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "종이와 먹값을 치르고 남은 동전은 다음 운반비로 보관했다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "상점 주인은 난초가 필요한 말만 했고 다른 연락소 이름을 묻지 않았다고 증언했습니다."
+          }
+        ]
+      },
+      {
+        id: "a10",
+        portrait: "assets/portraits/10.webp",
+        agentName: "호랑이",
+        role: "야간 경계",
+        region: "경성",
+        difficulty: "중간",
+        dialogue: "“밤새 창고 앞을 지켰습니다. 잠깐 자리를 비운 적은 없습니다.”",
+        correctDecision: "watch",
+        explanation:
+          "근무 기록과 목격 내용 사이에 확인할 부분이 있으나 목격 정보도 불완전합니다. 위험으로 단정하지 말고 감시해야 합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "호랑이는 오래 서 있으면 무릎이 아프지만 근무 중에는 지팡이를 사용하지 않습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "밤 10시부터 새벽 2시까지 창고 앞 근무, 이상 없음이라고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "주민은 밤 11시쯤 호랑이가 골목 끝에서 누군가와 이야기하는 듯했다고 말했습니다."
+          }
+        ]
+      },
+      {
+        id: "a11",
+        portrait: "assets/portraits/11.webp",
+        agentName: "백로",
+        role: "새 연락원 교육",
+        region: "상하이",
+        difficulty: "중간",
+        dialogue: "“새 사람들에게 사건의 순서를 쉽게 설명해 주겠습니다.”",
+        correctDecision: "danger",
+        explanation:
+          "3·1 운동은 1919년 3월 1일, 대한민국 임시정부 수립은 그 뒤인 1919년 4월입니다. 사건 순서를 뒤집었으므로 위험 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "백로는 이야기를 순서대로 정리하는 것을 좋아합니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "대한민국 임시정부의 지시를 받은 사람들이 1919년 3월 1일 만세 운동을 시작했다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "동료는 백로가 임시정부가 먼저 생겼다고 설명했다고 말했습니다."
+          }
+        ]
+      },
+      {
+        id: "a12",
+        portrait: "assets/portraits/12.webp",
+        agentName: "여우",
+        role: "인쇄물 운반",
+        region: "상하이",
+        difficulty: "중간",
+        dialogue: "“전단 묶음 하나가 젖어서 다시 포장했습니다.”",
+        correctDecision: "safe",
+        explanation:
+          "전단 묶음이 줄어든 이유는 빗물에 젖은 종이를 폐기했기 때문입니다. 기록과 증언이 일치하므로 안전 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "여우는 비 오는 날 종이를 천으로 여러 겹 감쌉니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "젖어 글자가 번진 전단은 버리고 남은 전단을 다시 묶어 전달했다고 기록했습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "인쇄소 견습생은 여우가 젖은 전단을 화로에서 태우는 것을 보았습니다."
+          }
+        ]
+      },
+      {
+        id: "a13",
+        portrait: "assets/portraits/13.webp",
+        agentName: "사슴",
+        role: "암호문 전달",
+        region: "항저우",
+        difficulty: "중간",
+        dialogue: "“그 봉투는 제 손을 떠난 뒤에는 건드리지 않았습니다.”",
+        correctDecision: "watch",
+        explanation:
+          "봉인에 문제가 생겼지만 운반 과정의 사고 가능성도 있습니다. 내용 유출 여부가 확실하지 않으므로 감시 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "사슴은 글씨를 작게 쓰는 버릇이 있어 다른 사람이 잘못 읽는 경우가 있습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "마차꾼에게 봉투를 전달했으며 봉인 상태에 이상이 없었다고 기록했습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "마차꾼은 길에서 상자가 떨어졌고 봉인에 금이 간 시점은 확실하지 않다고 말했습니다."
+          }
+        ]
+      },
+      {
+        id: "a14",
+        portrait: "assets/portraits/14.webp",
+        agentName: "물고기",
+        role: "연락소 정리",
+        region: "상하이",
+        difficulty: "중간",
+        dialogue: "“사용한 종이는 종류별로 나누어 처리했습니다.”",
+        correctDecision: "safe",
+        explanation:
+          "연락소 밖에서 발견된 종이는 신문 조각이었고, 암호문 종이는 직접 폐기했습니다. 안전 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "물고기는 조카에게 버린 신문만 주고 중요한 종이는 만지지 못하게 합니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "암호문 종이는 붉은 끈으로 표시하고 화로에 폐기했다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "골목 아이는 받은 종이가 신문이었으며 붉은 끈 종이는 물고기가 태웠다고 말했습니다."
+          }
+        ]
+      },
+      {
+        id: "a15",
+        portrait: "assets/portraits/15.webp",
+        agentName: "나비",
+        role: "연락망 기록",
+        region: "상하이",
+        difficulty: "어려움",
+        dialogue: "“기록에 대해서는 제게 맡기세요.”",
+        correctDecision: "danger",
+        explanation:
+          "업무 수첩의 역사 단체와 활동 설명에 사실과 다른 내용이 섞여 있습니다. 중요한 역사 정보를 왜곡했으므로 위험 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "나비는 오래된 편지를 사건과 시기 순으로 정리하는 것을 좋아합니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "대한광복회가 고종 복위를 위한 복벽운동을 전개했다고 정리했습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "동료는 나비가 여러 독립운동 단체의 성격을 섞어서 설명한다고 말했습니다."
+          }
+        ]
+      },
+      {
+        id: "a16",
+        portrait: "assets/portraits/16.webp",
+        agentName: "늑대",
+        role: "암호문 분류 보조",
+        region: "상하이",
+        difficulty: "어려움",
+        dialogue: "“보관실 문 앞까지만 갔을 뿐, 안에는 들어가지 않았습니다.”",
+        correctDecision: "watch",
+        explanation:
+          "출입 장부에는 이름이 있지만 실제 출입자를 확정하기 어렵습니다. 중요한 보관실 관련 사안이므로 감시와 추가 조사가 필요합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "늑대는 글씨와 이름이 비슷한 친척과 함께 살아 기록에서 혼동이 있었습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "보관실 앞 상자에서 일반 봉투만 받아 분류실로 옮겼고 안쪽에는 들어가지 않았다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "경비병은 출입 장부에 늑대의 이름이 있으나 모자를 쓴 사람의 얼굴은 보지 못했다고 말했습니다."
+          }
+        ]
+      },
+      {
+        id: "a17",
+        portrait: "assets/portraits/17.webp",
+        agentName: "들꽃",
+        role: "편지 번호 정리",
+        region: "경성",
+        difficulty: "어려움",
+        dialogue: "“봉투 바깥에 적힌 것만 번호표에 옮겼습니다.”",
+        correctDecision: "safe",
+        explanation:
+          "수상해 보인 문장은 편지 내용이 아니라 인쇄소 포장지의 문구였습니다. 편지를 읽었다는 근거가 없으므로 안전 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "들꽃은 인쇄소 포장지의 문구도 예쁘다며 공책에 옮겨 적는 버릇이 있습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "봉투 번호표 옆에 ‘푸른 등불 아래서’라는 문장이 적혀 있습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "인쇄소 일꾼은 그 문장이 포장지 가장자리에 인쇄된 문구라고 증언했습니다."
+          }
+        ]
+      },
+      {
+        id: "a18",
+        portrait: "assets/portraits/18.webp",
+        agentName: "태양",
+        role: "숙소 안내",
+        region: "상하이",
+        difficulty: "어려움",
+        dialogue: "“새 숙소 주소는 필요한 사람에게만 전했습니다.”",
+        correctDecision: "watch",
+        explanation:
+          "발견된 쪽지의 글씨는 다르지만 숙소를 짐작할 표현이 남아 있습니다. 직접 유출 증거가 부족하므로 감시가 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "태양은 길을 외우기 어려워 주소를 작은 종이에 적고 돌아오면 태운다고 합니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "새 숙소 위치를 둘째 골목, 푸른 문, 우물에서 스무 걸음으로 기록하고 쪽지는 폐기했다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "찻집 주인은 우물에서 스무 걸음이라는 표현이 적힌 젖은 쪽지를 주웠다고 말했습니다."
+          }
+        ]
+      },
+      {
+        id: "a19",
+        portrait: "assets/portraits/19.webp",
+        agentName: "오소리",
+        role: "창고 경계",
+        region: "항저우",
+        difficulty: "어려움",
+        dialogue: "“제가 독립운동에 앞장서겠습니다.”",
+        correctDecision: "safe",
+        explanation:
+          "서간도 생활 기록과 신흥무관학교 관련 증언이 서로 모순되지 않습니다. 현재 자료만으로는 위험 신호가 없으므로 안전 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "오소리는 어릴 때 거칠었으나 어른이 되어 행동을 고치려 노력했다고 가족이 적었습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "한반도와 서간도에서 생활했으며 임시정부 지원을 희망한다고 적었습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "다른 경비병은 오소리가 신흥무관학교 출신이라고 말했다고 증언했습니다."
+          }
+        ]
+      },
+      {
+        id: "a20",
+        portrait: "assets/portraits/20.webp",
+        agentName: "눈꽃",
+        role: "새 연락원 추천서 접수",
+        region: "상하이",
+        difficulty: "어려움",
+        dialogue: "“제 이름으로 들어온 추천서가 있다는 말은 처음 들었습니다.”",
+        correctDecision: "safe",
+        explanation:
+          "비슷한 인장을 다른 사람이 사용했을 가능성이 있으며, 눈꽃이 직접 추천서를 작성했다는 근거는 부족합니다. 안전 판단이 적절합니다.",
+        documents: [
+          {
+            title: "가정 기록",
+            text: "눈꽃의 인장은 왼쪽 아래가 조금 비도록 찍히는 특징이 있습니다."
+          },
+          {
+            title: "업무 수첩",
+            text: "눈꽃은 추천서 접수 업무만 맡았고 새 추천인을 적어 넣지 않았다고 기록했습니다."
+          },
+          {
+            title: "주변의 증언",
+            text: "문방구 주인은 눈꽃과 비슷하지만 왼쪽 아래까지 진한 인장을 든 낯선 사람을 보았다고 말했습니다."
+          }
+        ]
+      }
+    ];
+
+    function showScreen(screenId) {
+      $$(".screen").forEach((screen) => {
+        screen.classList.remove("active");
+      });
+
+      $("#" + screenId).classList.add("active");
+    }
+
+    function openModal(modalId) {
+      const modal = $("#" + modalId);
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal(modalId) {
+      const modal = $("#" + modalId);
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    function shuffle(list) {
+      const copied = [...list];
+
+      for (let i = copied.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copied[i], copied[j]] = [copied[j], copied[i]];
+      }
+
+      return copied;
+    }
+
+    function getDecisionText(decision) {
+      return {
+        safe: "안전",
+        watch: "감시",
+        danger: "위험"
+      }[decision];
+    }
+
+    function formatTime(seconds) {
+      const safeSeconds = Math.max(0, seconds);
+      const minutes = Math.floor(safeSeconds / 60);
+      const rest = safeSeconds % 60;
+
+      return `${String(minutes).padStart(2, "0")}:${String(rest).padStart(2, "0")}`;
+    }
+
+    function splitNickname(nickname) {
+      const match = nickname.trim().match(/^(\d{5})\s+([가-힣]+)$/);
+
+      if (!match) {
+        return {
+          studentNumber: "",
+          studentName: ""
+        };
+      }
+
+      return {
+        studentNumber: match[1],
+        studentName: match[2]
+      };
+    }
+
+    /*
+      Google Sheets 결과 전송 함수
+    */
+    function sendGameResultToGoogleSheet(grade) {
+      if (state.resultSent) {
+        console.log("이미 이 게임 결과를 전송했습니다.");
+        return;
+      }
+
+      if (!GOOGLE_SHEETS_WEB_APP_URL) {
+        console.warn("Google Sheets 웹 앱 URL이 설정되지 않았습니다.");
+        return;
+      }
+
+      state.resultSent = true;
+
+      const nameInfo = splitNickname(state.nickname);
+      const total = state.agents.length || 1;
+      const accuracy = Math.round((state.correctCount / total) * 100);
+
+      const resultData = {
+        nickname: state.nickname,
+        studentNumber: nameInfo.studentNumber,
+        studentName: nameInfo.studentName,
+
+        score: state.score,
+        correctCount: state.correctCount,
+        wrongCount: state.wrongCount,
+        accuracy: `${accuracy}%`,
+        maxCombo: state.maxCombo,
+        rushedCount: state.rushedCount,
+
+        grade: grade,
+        timeLimit: 300,
+        timeLeft: state.timeLeft,
+        testMode: false,
+        difficulty: "혼합",
+        agentCount: state.agents.length
+      };
+
+      console.log("Google Sheet 전송 데이터:", resultData);
+
+      fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(resultData)
+      })
+        .then(() => {
+          console.log("게임 결과 전송 요청을 보냈습니다.");
+        })
+        .catch((error) => {
+          console.error("게임 결과 전송 중 오류가 발생했습니다.", error);
+
+          /* 네트워크 오류 시 재전송 가능하게 변경 */
+          state.resultSent = false;
+        });
+    }
+
+    function validateNickname() {
+      const value = $("#nickname").value.trim();
+      const valid = NICKNAME_PATTERN.test(value);
+
+      $("#btn-start").disabled = !valid;
+
+      $("#nickname-validation").textContent = valid
+        ? "입력 형식이 확인되었습니다. 조사 시작이 가능합니다."
+        : "숫자 5자리와 띄어쓰기 뒤의 한글 이름을 입력해 주세요. 예: 31301 홍길동";
+
+      return valid;
+    }
+
+    function prepareGame() {
+      clearInterval(state.timerId);
+
+      state.score = 0;
+      state.combo = 0;
+      state.maxCombo = 0;
+      state.correctCount = 0;
+      state.wrongCount = 0;
+      state.rushedCount = 0;
+      state.resultSent = false;
+      state.currentIndex = 0;
+      state.viewedDocs = new Set();
+      state.decisionLog = [];
+      state.timeLeft = 300;
+      state.agents = shuffle(AGENTS);
+      state.isPlaying = true;
+
+      $("#loading-bar").style.width = "0%";
+      $("#loading-percent").textContent = "0%";
+      $("#loading-text").textContent =
+        "요원 기록과 비밀문서를 정리하고 있습니다.";
+
+      showScreen("screen-loading");
+      runLoadingAnimation();
+    }
+
+    function runLoadingAnimation() {
+      let progress = 0;
+
+      const loadingTimer = setInterval(() => {
+        progress += Math.floor(Math.random() * 14) + 7;
+
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(loadingTimer);
+
+          $("#loading-bar").style.width = "100%";
+          $("#loading-percent").textContent = "100%";
+          $("#loading-text").textContent = "작전 준비가 완료되었습니다.";
+
+          setTimeout(() => {
+            showScreen("screen-game");
+            renderCurrentAgent();
+            startTimer();
+          }, 450);
+
+          return;
+        }
+
+        $("#loading-bar").style.width = `${progress}%`;
+        $("#loading-percent").textContent = `${progress}%`;
+      }, 120);
+    }
+
+    function currentAgent() {
+      return state.agents[state.currentIndex];
+    }
+
+    function renderCurrentAgent() {
+      const agent = currentAgent();
+
+      if (!agent) {
+        finishGame();
+        return;
+      }
+
+      state.viewedDocs = new Set();
+
+      $("#agent-portrait-img").src = agent.portrait;
+      $("#agent-portrait-img").alt = `${agent.agentName} 요원 초상`;
+      $("#agent-name").textContent = `요원명: ${agent.agentName}`;
+      $("#agent-role").textContent = `역할: ${agent.role}`;
+      $("#agent-region").textContent = `활동 지역: ${agent.region}`;
+      $("#agent-difficulty").textContent = `난이도: ${agent.difficulty}`;
+      $("#agent-dialogue").textContent = agent.dialogue;
+
+      $("#document-grid").innerHTML = agent.documents
+        .map(
+          (doc, index) => `
+            <button
+              class="document-card"
+              type="button"
+              data-document-index="${index}"
+            >
+              <span class="doc-no">단서 ${index + 1}</span>
+              <b>${doc.title}</b>
+              <small>눌러서 자세히 읽기</small>
+            </button>
+          `
+        )
+        .join("");
+
+      $$(".document-card").forEach((button) => {
+        button.addEventListener("click", () => {
+          openGameDocument(Number(button.dataset.documentIndex));
+        });
+      });
+
+      $$(".decision-btn").forEach((button) => {
+        button.disabled = false;
+      });
+
+      updateHud();
+      updateDocumentCount();
+    }
+
+    function openGameDocument(documentIndex) {
+      const agent = currentAgent();
+      const doc = agent.documents[documentIndex];
+
+      state.viewedDocs.add(documentIndex);
+
+      $("#modal-doc-title").textContent = doc.title;
+      $("#modal-doc-text").textContent = doc.text;
+
+      const selectedCard = document.querySelector(
+        `[data-document-index="${documentIndex}"]`
+      );
+
+      if (selectedCard) {
+        selectedCard.classList.add("read");
+      }
+
+      updateDocumentCount();
+      openModal("document-modal");
+    }
+
+    function updateDocumentCount() {
+      $("#review-count").textContent =
+        `확인한 단서: ${state.viewedDocs.size} / 3`;
+    }
+
+    function updateHud() {
+      $("#hud-score").textContent = state.score;
+      $("#hud-time").textContent = formatTime(state.timeLeft);
+      $("#hud-count").textContent =
+        `${Math.min(state.currentIndex + 1, state.agents.length)} / ${state.agents.length}`;
+      $("#hud-combo").textContent = state.combo;
+
+      $("#time-warning").textContent =
+        state.timeLeft > 0 && state.timeLeft <= 30
+          ? "시간이 얼마 남지 않았습니다. 서둘러 심사하세요!"
+          : "";
+    }
+
+    function startTimer() {
+      clearInterval(state.timerId);
+
+      state.timerId = setInterval(() => {
+        if (!state.isPlaying) {
+          return;
+        }
+
+        state.timeLeft -= 1;
+        updateHud();
+
+        if (state.timeLeft <= 0) {
+          state.timeLeft = 0;
+          clearInterval(state.timerId);
+          finishGame(true);
+        }
+      }, 1000);
+    }
+
+    function getComboBonus(combo) {
+      if (combo >= 8) return 150;
+      if (combo >= 5) return 100;
+      if (combo >= 3) return 50;
+      return 0;
+    }
+
+    function handleDecision(decision) {
+      if (!state.isPlaying) {
+        return;
+      }
+
+      const agent = currentAgent();
+      const correct = agent.correctDecision === decision;
+      const rushed = state.viewedDocs.size < 3;
+
+      $$(".decision-btn").forEach((button) => {
+        button.disabled = true;
+      });
+
+      let scoreChange = 0;
+      let scoreMessage = "";
+
+      if (correct) {
+        state.correctCount += 1;
+        state.combo += 1;
+        state.maxCombo = Math.max(state.maxCombo, state.combo);
+
+        const comboBonus = getComboBonus(state.combo);
+        scoreChange = 100 + comboBonus;
+
+        if (rushed) {
+          scoreChange -= 20;
+          state.rushedCount += 1;
+
+          scoreMessage =
+            `판정 적중! +100점${comboBonus ? ` / 콤보 보너스 +${comboBonus}점` : ""}<br><br>` +
+            `<b>단서를 충분히 검토하지 않았습니다.</b><br>` +
+            `성급한 판정 -20점`;
+        } else {
+          scoreMessage =
+            `판정 적중! +100점${comboBonus ? ` / 콤보 보너스 +${comboBonus}점` : ""}`;
+        }
+
+        state.score += scoreChange;
+      } else {
+        state.wrongCount += 1;
+        state.combo = 0;
+        scoreChange = -30;
+        state.score = Math.max(0, state.score + scoreChange);
+
+        if (rushed) {
+          state.rushedCount += 1;
+          scoreMessage =
+            `판정이 빗나갔습니다. -30점<br><br>` +
+            `<b>단서를 충분히 검토하지 않았습니다.</b><br>` +
+            `중요한 판단은 세 가지 단서를 비교한 뒤 내려야 합니다.`;
+        } else {
+          scoreMessage = "판정이 빗나갔습니다. -30점";
+        }
+      }
+
+      state.decisionLog.push({
+        agent,
+        selected: decision,
+        correct,
+        rushed
+      });
+
+      updateHud();
+      showAnswer(agent, correct, scoreMessage);
+    }
+
+    function showAnswer(agent, correct, scoreMessage) {
+      $("#answer-title").textContent = correct
+        ? "판정 적중!"
+        : "다시 살펴보세요";
+
+      const label = $("#answer-decision-label");
+      label.textContent = `정답: ${getDecisionText(agent.correctDecision)}`;
+      label.className = `decision-label ${agent.correctDecision}`;
+
+      $("#answer-score-message").innerHTML = scoreMessage;
+      $("#answer-explanation").textContent = agent.explanation;
+
+      $("#btn-next-agent").textContent =
+        state.currentIndex === state.agents.length - 1
+          ? "작전 결과 보기"
+          : "다음 요원";
+
+      openModal("answer-modal");
+    }
+
+    function moveToNextAgent() {
+      closeModal("answer-modal");
+
+      state.currentIndex += 1;
+
+      if (state.currentIndex >= state.agents.length) {
+        finishGame();
+        return;
+      }
+
+      renderCurrentAgent();
+    }
+
+    function finishGame(timeout = false) {
+      if (!state.isPlaying && !timeout) {
+        return;
+      }
+
+      state.isPlaying = false;
+      clearInterval(state.timerId);
+
+      closeModal("answer-modal");
+      closeModal("document-modal");
+
+      const total = state.agents.length || 1;
+      const accuracy = Math.round((state.correctCount / total) * 100);
+
+      let grade = "";
+      let title = "";
+      let subtitle = "";
+
+      if (state.correctCount <= 5) {
+        grade = "부족";
+        title = "작전 평가: 부족";
+        subtitle =
+          "한 가지 단서만 보고 판단한 기록이 있습니다. 세 가지 단서를 끝까지 비교해 보세요.";
+      } else if (state.correctCount <= 15) {
+        grade = "보통";
+        title = "작전 평가: 보통";
+        subtitle =
+          "기본적인 판단은 잘했습니다. 단서 사이의 작은 차이도 더 살펴보세요.";
+      } else {
+        grade = "우수";
+        title = "작전 평가: 우수";
+        subtitle =
+          "문서와 증언을 신중히 비교했습니다. 훌륭한 조사 기록입니다.";
+      }
+
+      if (timeout) {
+        subtitle += " 제한 시간이 종료되었습니다.";
+      }
+
+      $("#result-title").textContent = title;
+      $("#result-subtitle").textContent = subtitle;
+      $("#result-score").textContent = state.score;
+      $("#result-accuracy").textContent = `${accuracy}%`;
+      $("#result-combo").textContent = state.maxCombo;
+
+      $("#result-analysis").innerHTML = `
+        <li>작전 평가: <b>${grade}</b></li>
+        <li>정답 판정: <b>${state.correctCount}명</b></li>
+        <li>오답 판정: <b>${state.wrongCount}명</b></li>
+        <li>성급한 판정: <b>${state.rushedCount}회</b></li>
+        <li>남은 작전 시간: <b>${formatTime(state.timeLeft)}</b></li>
+      `;
+
+      const wrongLogs = state.decisionLog.filter((log) => !log.correct);
+
+      $("#wrong-review").innerHTML = wrongLogs.length
+        ? `
+          <h3>오답 복기</h3>
+          ${wrongLogs
+            .map(
+              (log) => `
+                <article class="wrong-card">
+                  <b>요원명: ${log.agent.agentName}</b><br />
+                  내가 고른 판단: ${getDecisionText(log.selected)}<br />
+                  정답: ${getDecisionText(log.agent.correctDecision)}<br /><br />
+                  <small>${log.agent.explanation}</small>
+                </article>
+              `
+            )
+            .join("")}
+        `
+        : `
+          <article class="wrong-card">
+            <b>완벽한 판정 기록!</b><br />
+            모든 요원을 올바르게 판단했습니다.
+          </article>
+        `;
+
+      /*
+        ★ Google Sheet 전송 실행
+        이 코드가 있어야 게임 결과가 Apps Script URL로 전송됩니다.
+      */
+      sendGameResultToGoogleSheet(grade);
+
+      showScreen("screen-result");
+    }
+
+    $("#nickname").addEventListener("input", validateNickname);
+
+    $("#btn-start").addEventListener("click", () => {
+      if (!validateNickname()) {
+        $("#nickname").focus();
+        return;
+      }
+
+      state.nickname = $("#nickname").value.trim();
+      prepareGame();
+    });
+
+    $$(".decision-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        handleDecision(button.dataset.decision);
+      });
+    });
+
+    $("#btn-close-document").addEventListener("click", () => {
+      closeModal("document-modal");
+    });
+
+    $("#btn-next-agent").addEventListener("click", moveToNextAgent);
+
+    $("#btn-retry").addEventListener("click", () => {
+      prepareGame();
+    });
+
+    $("#btn-home").addEventListener("click", () => {
+      clearInterval(state.timerId);
+      state.isPlaying = false;
+      showScreen("screen-main");
+    });
+
+    $$(".modal").forEach((modal) => {
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          closeModal(modal.id);
+        }
+      });
+    });
+
+    validateNickname();
+  </script>
+</body>
+</html>
+
+							<script>
+                            	const SHEET_NAME = "게임기록";
+
+function doPost(e) {
+  const sheet = SpreadsheetApp
+    .getActiveSpreadsheet()
+    .getSheetByName(SHEET_NAME);
+
+  const data = JSON.parse(e.postData.contents);
+
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow([
+      "제출 시각",
+      "조사관 이름",
+      "학번",
+      "이름",
+      "점수",
+      "정답 수",
+      "오답 수",
+      "정확도",
+      "최대 콤보",
+      "성급한 판정",
+      "작전 평가",
+      "제한 시간",
+      "남은 시간",
+      "테스트 모드",
+      "난이도",
+      "요원 수"
+    ]);
+  }
+
+  sheet.appendRow([
+    new Date(),
+    data.nickname || "",
+    data.studentNumber || "",
+    data.studentName || "",
+    data.score || 0,
+    data.correctCount || 0,
+    data.wrongCount || 0,
+    data.accuracy || "0%",
+    data.maxCombo || 0,
+    data.rushedCount || 0,
+    data.grade || "",
+    data.timeLimit || 0,
+    data.timeLeft || 0,
+    data.testMode ? "테스트 모드" : "일반 모드",
+    data.difficulty || "혼합",
+    data.agentCount || 0
+  ]);
+
+  return ContentService
+    .createTextOutput("success")
+    .setMimeType(ContentService.MimeType.TEXT);
+}
+							</script>
+                        </body>
+                        </html>
+                    
